@@ -71,9 +71,7 @@ public class AuthController {
                 throw new Exception("Đã tồn tại người dùng, vui lòng chọn tên đăng nhập khác");
             }
             String password = user.getPassword();
-
             Role role = roleService.findByName("ROLE_USER");
-
             if (role == null) {
                 throw new Exception("Vai trò không tồn tại");
             }
