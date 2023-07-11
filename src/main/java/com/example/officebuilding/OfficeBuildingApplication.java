@@ -29,7 +29,9 @@ public class OfficeBuildingApplication {
     public ModelMapper modelMapper() {
         return new ModelMapper();
     }
+ 
 
+    
     @Bean
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurerAdapter() {
@@ -50,9 +52,9 @@ public class OfficeBuildingApplication {
             Role roleAdmin = new Role();
             roleAdmin.setName("ROLE_ADMIN");
             roles.add(roleAdmin);
-            admin.setFullName("Lam Truong");
             admin.setUsername("admin");
             admin.setPassword("12345678");
+            admin.setEmail("admin1@gmail.com");
             admin.setRoles(roles);
             userService.save(admin);
         }

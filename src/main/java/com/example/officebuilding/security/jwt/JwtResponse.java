@@ -9,24 +9,25 @@ public class JwtResponse {
     private String token;
     private String type = "Bearer";
     private String username;
-    private String name;
+    private String email;
     private Collection<? extends GrantedAuthority> roles;
 
-    public JwtResponse(String accessToken, Integer id, String username, String name, Collection<? extends GrantedAuthority> roles) {
+    public JwtResponse(String accessToken, Integer id, String username,String email, Collection<? extends GrantedAuthority> roles) {
         this.token = accessToken;
         this.username = username;
         this.roles = roles;
-        this.name = name;
+        this.email = email;
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getEmail() {
+        return email;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setEmail(String email) {
+        this.email = email;
     }
+
 
     public Integer getId() {
         return id;

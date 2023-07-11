@@ -23,9 +23,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @CrossOrigin("*")
@@ -55,7 +53,7 @@ public class AuthController {
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
             User currentUser = userService.findByUsername(user.getUsername()).get();
             logger.info("User Sign In. Message - {}", currentUser);
-            return ResponseEntity.ok(new JwtResponse(jwt, currentUser.getId(), userDetails.getUsername(), currentUser.getFullName(), userDetails.getAuthorities()));
+            return ResponseEntity.ok(new JwtResponse(jwt, currentUser.getId(), userDetails.getUsername(),currentUser.getEmail(), userDetails.getAuthorities()));
         }
         catch (Exception e){
             System.out.println(e);
@@ -69,6 +67,9 @@ public class AuthController {
         try {
             if(userService.findByUsername(user.getUsername()).isPresent()){
                 throw new Exception("Đã tồn tại người dùng, vui lòng chọn tên đăng nhập khác");
+            }
+            if(userService.findByEmail(user.getEmail()).isPresent()){
+                throw new Exception("Email đã tồn tại, vui lòng chọn Email khác");
             }
             String password = user.getPassword();
             Role role = roleService.findByName("ROLE_USER");
@@ -87,7 +88,7 @@ public class AuthController {
             String jwt = jwtService.generateTokenLogin(authentication);
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
             User currentUser = userService.findByUsername(user.getUsername()).get();
-            return ResponseEntity.ok(new JwtResponse(jwt, currentUser.getId(), userDetails.getUsername(), currentUser.getFullName(), userDetails.getAuthorities()));
+            return ResponseEntity.ok(new JwtResponse(jwt, currentUser.getId(), userDetails.getUsername(), currentUser.getEmail(), userDetails.getAuthorities()));
         }
         catch (Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
