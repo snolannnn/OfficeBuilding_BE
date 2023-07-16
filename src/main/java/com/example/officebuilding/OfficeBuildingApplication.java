@@ -1,7 +1,5 @@
 package com.example.officebuilding;
 
-import com.example.officebuilding.entities.ServiceEntity;
-import com.example.officebuilding.repository.IServiceRepository;
 import com.example.officebuilding.security.entities.Role;
 import com.example.officebuilding.security.entities.User;
 import com.example.officebuilding.security.service.IUserService;
@@ -23,15 +21,12 @@ import java.util.Set;
 public class OfficeBuildingApplication {
     @Autowired
     private IUserService userService;
-    @Autowired
-    private IServiceRepository serviceRepository;
     @Bean
     public ModelMapper modelMapper() {
         return new ModelMapper();
     }
- 
 
-    
+
     @Bean
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurerAdapter() {
@@ -59,21 +54,6 @@ public class OfficeBuildingApplication {
             userService.save(admin);
         }
 
-        List<ServiceEntity> requiredServices = serviceRepository.findServiceEntitiesByRequired(1);
-        if(requiredServices.isEmpty()){
-            ServiceEntity serviceEntity = new ServiceEntity();
-            serviceEntity.setName("Vệ sinh");
-            serviceEntity.setRequired(1);
-            serviceEntity.setPrice(150000);
-            serviceEntity.setType("Dịch vụ bắt buộc");
-            serviceRepository.save(serviceEntity);
-            ServiceEntity serviceEntity1 = new ServiceEntity();
-            serviceEntity1.setName("Bảo vệ");
-            serviceEntity1.setRequired(1);
-            serviceEntity1.setPrice(200000);
-            serviceEntity1.setType("Dịch vụ bắt buộc");
-            serviceRepository.save(serviceEntity1);
-        }
     }
 
     public static void main(String[] args) {

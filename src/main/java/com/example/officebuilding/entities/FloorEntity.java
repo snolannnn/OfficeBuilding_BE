@@ -1,19 +1,26 @@
 package com.example.officebuilding.entities;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import javax.persistence.*;
 
-@Data
+import javax.persistence.*;
+import java.sql.Timestamp;
+
 @Entity
+@Data
 @Table(name = "floor")
-@NoArgsConstructor
 public class FloorEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    private String name;
-    private double pricePerM2;
-    private double groundArea;
+    private Integer id;
 
+    @Column(nullable = false)
+    private String fName;
+
+    private Timestamp fTime;
+
+    @PrePersist
+    @PreUpdate
+    protected void onUpdate() {
+        fTime = new Timestamp(System.currentTimeMillis());
+    }
 }

@@ -7,27 +7,29 @@ import java.sql.Timestamp;
 
 @Entity
 @Data
-@Table(name = "service")
-public class ServiceEntity {
+@Table(name = "customer")
+public class CustomerEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(nullable = false)
-    private String sName;
+    private String cName;
 
     @Column(nullable = false)
-    private Integer sStatus;
+    private String cPhone;
 
     @Column(nullable = false)
-    private double sPrice;
+    private String cEmail;
 
-    private String sDesc;
-    private Timestamp sTime;
+    @Column(nullable = false)
+    private String cTaxCode;
+
+    private Timestamp cTime;
 
     @PrePersist
     @PreUpdate
     protected void onUpdate() {
-        sTime = new Timestamp(System.currentTimeMillis());
+        cTime = new Timestamp(System.currentTimeMillis());
     }
 }

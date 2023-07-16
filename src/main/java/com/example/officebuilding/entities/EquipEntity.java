@@ -7,31 +7,29 @@ import java.sql.Timestamp;
 
 @Entity
 @Data
-@Table(name = "room")
-public class RoomEntity {
+@Table(name = "equipment")
+public class EquipEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(nullable = false)
-    private String rName;
+    private String eName;
 
     @Column(nullable = false)
-    private double rPrice;
+    private Integer eStatus;
 
-    @Column(nullable = false)
-    private Integer rStatus;
-
-    private String rDesc;
-    private Timestamp rTime;
+    private String eDesc;
+    private Timestamp eTime;
 
     @PrePersist
     @PreUpdate
     protected void onUpdate() {
-        rTime = new Timestamp(System.currentTimeMillis());
+        eTime = new Timestamp(System.currentTimeMillis());
     }
 
     @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     @JoinColumn(name = "floor_id", referencedColumnName= "id",nullable = true)
     private FloorEntity floor;
+
 }

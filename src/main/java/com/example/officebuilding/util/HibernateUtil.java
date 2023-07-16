@@ -3,7 +3,6 @@ package com.example.officebuilding.util;
 import java.util.Properties;
 
 
-import com.example.officebuilding.dtos.CompanyEmployeeDTO;
 import com.example.officebuilding.entities.*;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -22,7 +21,7 @@ public class HibernateUtil {
                 // Hibernate settings equivalent to hibernate.cfg.xml's properties
                 Properties settings = new Properties();
                 settings.put(Environment.DRIVER, "com.mysql.cj.jdbc.Driver");
-                settings.put(Environment.URL, "jdbc:mysql://localhost:3306/qltoanha?useSSL=false");
+                settings.put(Environment.URL, "jdbc:mysql://localhost:3306/building?useSSL=false");
                 settings.put(Environment.USER, "root");
                 settings.put(Environment.PASS, "123456");
                 settings.put(Environment.DIALECT, "org.hibernate.dialect.MySQL8Dialect");
@@ -33,18 +32,11 @@ public class HibernateUtil {
 
                 configuration.setProperties(settings);
 
-                configuration.addAnnotatedClass(CompanyEmployeeEntity.class);
-                configuration.addAnnotatedClass(CompanyEntity.class);
-                configuration.addAnnotatedClass(BuildingEmployeeEntity.class);
-                configuration.addAnnotatedClass(ContractEntity.class);
                 configuration.addAnnotatedClass(FloorEntity.class);
-                configuration.addAnnotatedClass(MonthEntity.class);
-                configuration.addAnnotatedClass(MonthlyBillEntity.class);
-                configuration.addAnnotatedClass(MonthlySalaryEntity.class);
-                configuration.addAnnotatedClass(MonthlyServiceBillEntity.class);
-                configuration.addAnnotatedClass(SalaryEntity.class);
-                configuration.addAnnotatedClass(ServiceContractEntity.class);
+                configuration.addAnnotatedClass(RoomEntity.class);
                 configuration.addAnnotatedClass(ServiceEntity.class);
+                configuration.addAnnotatedClass(EquipEntity.class);
+                configuration.addAnnotatedClass(CustomerEntity.class);
 
                 ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                         .applySettings(configuration.getProperties()).build();
