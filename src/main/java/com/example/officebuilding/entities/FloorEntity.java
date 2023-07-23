@@ -13,8 +13,9 @@ public class FloorEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+
     @Column(nullable = false)
-    private String fName;
+    private String floorName;
 
     private Timestamp fTime;
 

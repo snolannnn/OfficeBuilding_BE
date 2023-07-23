@@ -14,15 +14,15 @@ public class RoomEntity {
     private Integer id;
 
     @Column(nullable = false)
-    private String rName;
+    private String roomName;
 
     @Column(nullable = false)
-    private double rPrice;
+    private double roomPrice;
 
     @Column(nullable = false)
-    private Integer rStatus;
+    private Integer roomStatus;
 
-    private String rDesc;
+    private String roomDesc;
     private Timestamp rTime;
 
     @PrePersist
