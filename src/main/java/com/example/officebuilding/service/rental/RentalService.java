@@ -1,0 +1,55 @@
+package com.example.officebuilding.service.rental;
+
+import com.example.officebuilding.dtos.RentalDTO;
+import com.example.officebuilding.entities.RentalEntity;
+import com.example.officebuilding.repository.IRentalRepository;
+import com.example.officebuilding.service.rental.IRentalService;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+@Service
+public class RentalService implements IRentalService {
+    @Autowired
+    private ModelMapper modelMapper;
+
+    @Autowired
+    private IRentalRepository rentalRepository;
+
+    @Override
+    public List<RentalDTO> findAll(){
+        List<RentalEntity> rentalEntities = rentalRepository.findAll();
+        List<RentalDTO> rentalDTOS = rentalEntities.stream().map(rentalEntity -> modelMapper.map(rentalEntity, RentalDTO.class)).collect(Collectors.toList());
+        return rentalDTOS;
+    }
+
+    @Override
+    public Optional<RentalDTO> findById(Integer id) {
+        // Gọi repo lấy dữ liệu entity từ db
+        Optional<RentalEntity> rentalEntity = rentalRepository.findById(id);
+
+        //Chuyển entity thành DTO rồi trả về cho controller:
+        return rentalEntity.map(rentalEntity1 -> modelMapper.map(rentalEntity1, RentalDTO.class));
+    }
+    @Override
+    public RentalDTO save(RentalDTO rentalDTO){
+        RentalEntity rentalEntity = modelMapper.map(rentalDTO, RentalEntity.class);
+        RentalEntity updateRentalEntity = rentalRepository.save(rentalEntity);
+        return modelMapper.map(updateRentalEntity,RentalDTO.class);
+    }
+
+    @Override
+    public RentalDTO update(RentalDTO rentalDTO){
+        RentalEntity rentalEntity = modelMapper.map(rentalDTO,RentalEntity.class);
+        RentalEntity updatedRentalEntity = rentalRepository.save(rentalEntity);
+        return modelMapper.map(updatedRentalEntity,RentalDTO.class);
+    }
+    @Override
+    public void remove(Integer id){
+        rentalRepository.deleteById(id);
+    }
+}

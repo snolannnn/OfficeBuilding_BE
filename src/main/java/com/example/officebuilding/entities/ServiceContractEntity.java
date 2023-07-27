@@ -1,33 +1,29 @@
 package com.example.officebuilding.entities;
 
-import com.example.officebuilding.security.entities.Role;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.List;
-import java.util.Set;
 
 @Entity
 @Data
-@Table(name = "rental")
-public class RentalEntity {
+@Table(name = "service_contract")
+public class ServiceContractEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(nullable = false)
-    private String reDateBegin;
+    private String scDateBegin;
 
-    @Column(nullable = false)
-    private String reDateEnd;
+    private String scDesc;
 
-    private Timestamp reTime;
+    private Timestamp scTime;
 
     @PrePersist
     @PreUpdate
     protected void onUpdate() {
-        reTime = new Timestamp(System.currentTimeMillis());
+        scTime = new Timestamp(System.currentTimeMillis());
     }
 
     @OneToOne
@@ -37,5 +33,9 @@ public class RentalEntity {
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private CustomerEntity customer;
+
+    @ManyToOne
+    @JoinColumn(name = "service_id")
+    private ServiceEntity service;
 
 }
