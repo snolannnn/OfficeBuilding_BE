@@ -14,16 +14,16 @@ public class CustomerEntity {
     private Integer id;
 
     @Column(nullable = false)
-    private String cName;
+    private String cusName;
 
     @Column(nullable = false)
-    private String cPhone;
+    private String cusPhone;
 
     @Column(nullable = false)
-    private String cEmail;
+    private String cusEmail;
 
     @Column(nullable = false)
-    private String cTaxCode;
+    private String cusTaxCode;
 
     private Timestamp cTime;
 

@@ -14,15 +14,15 @@ public class ServiceEntity {
     private Integer id;
 
     @Column(nullable = false)
-    private String sName;
+    private String serviceName;
 
     @Column(nullable = false)
-    private Integer sStatus;
+    private Integer serviceStatus;
 
     @Column(nullable = false)
-    private double sPrice;
+    private double servicePrice;
 
-    private String sDesc;
+    private String serviceDesc;
     private Timestamp sTime;
 
     @PrePersist

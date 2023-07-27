@@ -14,12 +14,12 @@ public class EquipEntity {
     private Integer id;
 
     @Column(nullable = false)
-    private String eName;
+    private String equipmentName;
 
     @Column(nullable = false)
-    private Integer eStatus;
+    private Integer equipmentStatus;
 
-    private String eDesc;
+    private String equipmentDesc;
     private Timestamp eTime;
 
     @PrePersist
