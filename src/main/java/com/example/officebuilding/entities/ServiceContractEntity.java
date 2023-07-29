@@ -31,8 +31,8 @@ public class ServiceContractEntity {
     private RoomEntity room;
 
     @ManyToOne
-    @JoinColumn(name = "customer_id")
-    private CustomerEntity customer;
+    @JoinColumn(name = "company_id")
+    private CompanyEntity company;
 
     @ManyToOne
     @JoinColumn(name = "service_id")

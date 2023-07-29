@@ -13,5 +13,5 @@ public class RentalDTO {
     private Timestamp reTime;
 
     private Integer roomId;
-    private Integer customerId;
+    private Integer companyId;
 }

@@ -36,7 +36,7 @@ public class HibernateUtil {
                 configuration.addAnnotatedClass(RoomEntity.class);
                 configuration.addAnnotatedClass(ServiceEntity.class);
                 configuration.addAnnotatedClass(EquipEntity.class);
-                configuration.addAnnotatedClass(CustomerEntity.class);
+                configuration.addAnnotatedClass(CompanyEntity.class);
 
                 ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                         .applySettings(configuration.getProperties()).build();

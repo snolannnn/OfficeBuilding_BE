@@ -7,8 +7,8 @@ import java.sql.Timestamp;
 
 @Entity
 @Data
-@Table(name = "customer")
-public class CustomerEntity {
+@Table(name = "company")
+public class CompanyEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

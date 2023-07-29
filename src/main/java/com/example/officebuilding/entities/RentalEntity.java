@@ -1,12 +1,9 @@
 package com.example.officebuilding.entities;
 
-import com.example.officebuilding.security.entities.Role;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.List;
-import java.util.Set;
 
 @Entity
 @Data
@@ -35,7 +32,7 @@ public class RentalEntity {
     private RoomEntity room;
 
     @ManyToOne
-    @JoinColumn(name = "customer_id")
-    private CustomerEntity customer;
+    @JoinColumn(name = "company_id")
+    private CompanyEntity company;
 
 }

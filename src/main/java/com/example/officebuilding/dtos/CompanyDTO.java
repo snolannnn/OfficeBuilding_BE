@@ -5,7 +5,7 @@ import lombok.Data;
 import java.sql.Timestamp;
 
 @Data
-public class CustomerDTO {
+public class CompanyDTO {
     private int id;
     private String cusName;
     private String cusEmail;
