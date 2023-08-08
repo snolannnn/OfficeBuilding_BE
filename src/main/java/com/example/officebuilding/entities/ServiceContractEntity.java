@@ -26,13 +26,10 @@ public class ServiceContractEntity {
         scTime = new Timestamp(System.currentTimeMillis());
     }
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "room_id")
     private RoomEntity room;
 
-    @ManyToOne
-    @JoinColumn(name = "company_id")
-    private CompanyEntity company;
 
     @ManyToOne
     @JoinColumn(name = "service_id")

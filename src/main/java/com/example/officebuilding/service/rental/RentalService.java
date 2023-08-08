@@ -4,6 +4,7 @@ import com.example.officebuilding.dtos.RentalDTO;
 import com.example.officebuilding.entities.RentalEntity;
 import com.example.officebuilding.repository.IRentalRepository;
 import com.example.officebuilding.service.rental.IRentalService;
+import com.example.officebuilding.service.room.RoomService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,9 @@ public class RentalService implements IRentalService {
 
     @Autowired
     private IRentalRepository rentalRepository;
+
+    @Autowired
+    private RoomService roomService;
 
     @Override
     public List<RentalDTO> findAll(){
@@ -51,5 +55,17 @@ public class RentalService implements IRentalService {
     @Override
     public void remove(Integer id){
         rentalRepository.deleteById(id);
+    }
+
+    @Override
+    public RentalDTO createRentalWithRoomStatusChange(RentalDTO rentalDTO, Integer newRoomStatus) {
+        // Create a new rental entity
+        RentalEntity rentalEntity = modelMapper.map(rentalDTO, RentalEntity.class);
+        RentalEntity savedRentalEntity = rentalRepository.save(rentalEntity);
+
+        // Update room status using RoomService
+        roomService.updateRoomStatus(rentalDTO.getRoomId(), newRoomStatus);
+
+        return modelMapper.map(savedRentalEntity, RentalDTO.class);
     }
 }

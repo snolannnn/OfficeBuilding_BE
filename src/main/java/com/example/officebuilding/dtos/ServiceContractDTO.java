@@ -12,6 +12,5 @@ public class ServiceContractDTO {
     private Timestamp scTime;
 
     private Integer roomId;
-    private Integer companyId;
     private Integer serviceId;
 }

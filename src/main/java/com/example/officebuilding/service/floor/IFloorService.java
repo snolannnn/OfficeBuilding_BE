@@ -5,4 +5,5 @@ import com.example.officebuilding.service.IGeneralService;
 
 public interface IFloorService extends IGeneralService<FloorDTO> {
     FloorDTO update(FloorDTO floorDTO);
+
 }

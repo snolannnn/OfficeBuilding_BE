@@ -22,7 +22,7 @@ public class RentalController {
     @PostMapping("/rental/create")
     public ResponseEntity<RentalDTO> createNewRental(@RequestBody RentalDTO rentalDTO){
         logger.info("Body- {}", rentalDTO);
-        return new ResponseEntity<>(rentalService.save(rentalDTO),HttpStatus.OK);
+        return new ResponseEntity<>(rentalService.createRentalWithRoomStatusChange(rentalDTO,1),HttpStatus.OK);
     }
 
     @GetMapping("/user/rental/getAll")

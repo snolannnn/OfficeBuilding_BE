@@ -1,6 +1,7 @@
 package com.example.officebuilding.controller;
 
 import com.example.officebuilding.dtos.EquipmentDTO;
+import com.example.officebuilding.dtos.RoomDTO;
 import com.example.officebuilding.service.equipment.IEquipmentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,5 +58,13 @@ public class EquipmentController {
             equipmentService.remove(id);
             return new ResponseEntity<>(equipmentDTO,HttpStatus.OK);
         }).orElseGet(()->new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    @GetMapping("/user/equipment/getAllByFloorId/{id}")
+    public ResponseEntity<List<EquipmentDTO>> findAllEquipmentsByFloorId(@PathVariable Integer id){
+        List<EquipmentDTO> equipDTOs = equipmentService.findAllEquipmentsByFloorId(id);
+        return new ResponseEntity<>(equipDTOs,HttpStatus.OK);
+
+
     }
 }

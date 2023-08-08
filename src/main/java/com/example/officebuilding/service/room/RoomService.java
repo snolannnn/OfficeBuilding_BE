@@ -51,4 +51,25 @@ public class RoomService implements IRoomService {
     public void remove(Integer id){
         roomRepository.deleteById(id);
     }
+
+    @Override
+    public List<RoomDTO> findAllRoomsByFloorId(Integer id){
+        List<RoomEntity> roomEntities = roomRepository.findByFloorId(id);
+        return roomEntities.stream()
+                .map(orderEntity -> modelMapper.map(orderEntity, RoomDTO.class))
+                .collect(Collectors.toList());
+    }
+    @Override
+    public void updateRoomStatus(Integer roomId, Integer newStatus) {
+        Optional<RoomEntity> roomEntityOptional = roomRepository.findById(roomId);
+
+        if (roomEntityOptional.isPresent()) {
+            RoomEntity roomEntity = roomEntityOptional.get();
+            roomEntity.setRoomStatus(newStatus);
+            roomRepository.save(roomEntity);
+        } else {
+            // Handle case when room is not found
+            // You can throw an exception or handle it based on your application's logic
+        }
+    }
 }

@@ -1,7 +1,9 @@
 package com.example.officebuilding.service.equipment;
 
 import com.example.officebuilding.dtos.EquipmentDTO;
+import com.example.officebuilding.dtos.RoomDTO;
 import com.example.officebuilding.entities.EquipEntity;
+import com.example.officebuilding.entities.RoomEntity;
 import com.example.officebuilding.repository.IEquipmentRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,5 +52,13 @@ public class EquipmentService implements IEquipmentService {
     @Override
     public void remove(Integer id){
         equipmentRepository.deleteById(id);
+    }
+
+    @Override
+    public List<EquipmentDTO> findAllEquipmentsByFloorId(Integer id){
+        List<EquipEntity> equipEntities = equipmentRepository.findByFloorId(id);
+        return equipEntities.stream()
+                .map(orderEntity -> modelMapper.map(orderEntity, EquipmentDTO.class))
+                .collect(Collectors.toList());
     }
 }

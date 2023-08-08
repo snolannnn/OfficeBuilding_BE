@@ -5,4 +5,5 @@ import com.example.officebuilding.service.IGeneralService;
 
 public interface IRentalService extends IGeneralService<RentalDTO> {
     RentalDTO update(RentalDTO rentalDTO);
+    RentalDTO createRentalWithRoomStatusChange(RentalDTO rentalDTO, Integer newRoomStatus);
 }

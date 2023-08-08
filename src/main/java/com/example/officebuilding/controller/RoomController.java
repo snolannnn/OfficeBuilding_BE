@@ -60,4 +60,12 @@ public class RoomController {
             return new ResponseEntity<>(roomDTO,HttpStatus.OK);
         }).orElseGet(()->new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
+
+    @GetMapping("/user/room/getAllByFloorId/{id}")
+    public ResponseEntity<List<RoomDTO>> findAllRoomsByFloorId(@PathVariable Integer id){
+        List<RoomDTO> roomDTOs = roomService.findAllRoomsByFloorId(id);
+        return new ResponseEntity<>(roomDTOs,HttpStatus.OK);
+
+
+    }
 }
