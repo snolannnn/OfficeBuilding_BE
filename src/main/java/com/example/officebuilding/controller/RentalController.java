@@ -58,4 +58,11 @@ public class RentalController {
             return new ResponseEntity<>(rentalDTO,HttpStatus.OK);
         }).orElseGet(()->new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
+
+    @PutMapping("/rental/cancel/{id}")
+    public ResponseEntity<RentalDTO> cancelRental(@PathVariable Integer id) {
+        logger.info("Body- {}", id);
+        rentalService.cancelRental(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

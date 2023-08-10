@@ -20,6 +20,9 @@ public class RentalEntity {
     @Column(nullable = false)
     private String reDateEnd;
 
+    @Column(nullable = false)
+    private Integer reStatus;
+
     private Timestamp reTime;
 
     @PrePersist

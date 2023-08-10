@@ -68,4 +68,16 @@ public class RentalService implements IRentalService {
 
         return modelMapper.map(savedRentalEntity, RentalDTO.class);
     }
+    @Override
+    public void cancelRental(Integer rentalId) {
+        Optional<RentalEntity> rentalEntityOptional = rentalRepository.findById(rentalId);
+        rentalEntityOptional.ifPresent(rentalEntity -> {
+            // Update rental status
+            rentalEntity.setReStatus(0);
+            rentalRepository.save(rentalEntity);
+
+            // Update room status using RoomService
+            roomService.updateRoomStatus(rentalEntity.getRoom().getId(), 0); // Assuming 0 represents available status
+        });
+    }
 }
