@@ -51,4 +51,12 @@ public class ServiceContractService implements IServiceContractService {
     public void remove(Integer id){
         serviceContractRepository.deleteById(id);
     }
+
+    @Override
+    public List<ServiceContractDTO> findAllByStatus(Integer scStatus){
+        List<ServiceContractEntity> serviceContractEntities = serviceContractRepository.findByScStatus(scStatus);
+        return serviceContractEntities.stream()
+                .map((serviceContractEntity -> modelMapper.map(serviceContractEntity, ServiceContractDTO.class)))
+                .collect(Collectors.toList());
+    }
 }

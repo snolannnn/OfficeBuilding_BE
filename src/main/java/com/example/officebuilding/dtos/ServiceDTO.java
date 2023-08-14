@@ -9,7 +9,7 @@ public class ServiceDTO {
     private int id;
     private String serviceName;
     private double servicePrice;
-    private Integer serviceStatus;
+//    private Integer serviceStatus;
     private String serviceDesc;
     private Timestamp sTime;
 }

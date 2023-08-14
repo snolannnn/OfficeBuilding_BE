@@ -65,4 +65,16 @@ public class RentalController {
         rentalService.cancelRental(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @GetMapping("/rental/hide")
+    public ResponseEntity<List<RentalDTO>> findRentalsWithinDateRange(
+            @RequestParam Integer month,
+            @RequestParam Integer year
+           ) {
+        logger.info("Body- {}", month);
+        List<RentalDTO> rentals = rentalService.findRentalsWithinDateRange(month,year);
+        return ResponseEntity.ok(rentals);
+    }
+
+
 }

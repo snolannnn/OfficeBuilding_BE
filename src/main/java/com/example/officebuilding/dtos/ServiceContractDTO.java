@@ -7,10 +7,11 @@ import java.sql.Timestamp;
 @Data
 public class ServiceContractDTO {
     private int id;
+    private String scDateEnd;
     private String scDateBegin;
-    private String scDesc;
+    private int scStatus;
     private Timestamp scTime;
 
-    private Integer roomId;
+    private Integer companyId;
     private Integer serviceId;
 }

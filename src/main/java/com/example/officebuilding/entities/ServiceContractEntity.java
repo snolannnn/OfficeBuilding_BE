@@ -16,7 +16,12 @@ public class ServiceContractEntity {
     @Column(nullable = false)
     private String scDateBegin;
 
-    private String scDesc;
+    @Column(nullable = false)
+    private String scDateEnd;
+
+    @Column(nullable = false)
+    private Integer scStatus;
+
 
     private Timestamp scTime;
 
@@ -27,8 +32,8 @@ public class ServiceContractEntity {
     }
 
     @ManyToOne
-    @JoinColumn(name = "room_id")
-    private RoomEntity room;
+    @JoinColumn(name = "company_id")
+    private CompanyEntity company;
 
 
     @ManyToOne

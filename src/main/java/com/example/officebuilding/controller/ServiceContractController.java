@@ -1,5 +1,6 @@
 package com.example.officebuilding.controller;
 
+import com.example.officebuilding.dtos.RentalDTO;
 import com.example.officebuilding.dtos.ServiceContractDTO;
 import com.example.officebuilding.service.serviceContract.IServiceContractService;
 import org.slf4j.Logger;
@@ -57,5 +58,13 @@ public class ServiceContractController {
             serviceContractService.remove(id);
             return new ResponseEntity<>(serviceContractDTO,HttpStatus.OK);
         }).orElseGet(()->new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    @GetMapping("/user/serviceContract/findByStatus/{status}")
+    public ResponseEntity<List<ServiceContractDTO>> findServiceContractByStatus(@PathVariable Integer status) {
+        logger.info("Body- {}", status);
+
+        List<ServiceContractDTO> serviceContracts = serviceContractService.findAllByStatus(status);
+        return new ResponseEntity<>(serviceContracts, HttpStatus.OK);
     }
 }
