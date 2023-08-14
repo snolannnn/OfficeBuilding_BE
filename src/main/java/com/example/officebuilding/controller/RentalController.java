@@ -60,13 +60,13 @@ public class RentalController {
     }
 
     @PutMapping("/rental/cancel/{id}")
-    public ResponseEntity<RentalDTO> cancelRental(@PathVariable Integer id) {
+    public ResponseEntity<RentalDTO> cancelRental(@PathVariable Integer id,@RequestParam String dateEnd) {
         logger.info("Body- {}", id);
-        rentalService.cancelRental(id);
+        rentalService.cancelRental(id,dateEnd);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/rental/hide")
+    @GetMapping("user/rental/hide")
     public ResponseEntity<List<RentalDTO>> findRentalsWithinDateRange(
             @RequestParam Integer month,
             @RequestParam Integer year
