@@ -20,6 +20,9 @@ public class ServiceContractEntity {
     private String scDateEnd;
 
     @Column(nullable = false)
+    private double scPrice;
+
+    @Column(nullable = false)
     private Integer scStatus;
 
 

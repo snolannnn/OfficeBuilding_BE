@@ -66,6 +66,12 @@ public class RentalController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @GetMapping("user/rental/findByStatus/{status}")
+    public ResponseEntity<List<RentalDTO>> findAllRentalByStatus(@PathVariable Integer status){
+        List<RentalDTO> rentals = rentalService.findAllByStatus(status);
+        return ResponseEntity.ok(rentals);
+    }
+
     @GetMapping("user/rental/hide")
     public ResponseEntity<List<RentalDTO>> findRentalsWithinDateRange(
             @RequestParam Integer month,

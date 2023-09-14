@@ -16,8 +16,8 @@ public class ServiceEntity {
     @Column(nullable = false)
     private String serviceName;
 
-//    @Column(nullable = false)
-//    private Integer serviceStatus;
+    @Column(nullable = false)
+    private Integer serviceStatus;
 
     @Column(nullable = false)
     private double servicePrice;

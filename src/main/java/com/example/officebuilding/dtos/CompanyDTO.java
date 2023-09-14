@@ -11,5 +11,6 @@ public class CompanyDTO {
     private String cusEmail;
     private String cusPhone;
     private String cusTaxCode;
+    private int cusStatus;
     private Timestamp cTime;
 }

@@ -67,4 +67,14 @@ public class ServiceContractController {
         List<ServiceContractDTO> serviceContracts = serviceContractService.findAllByStatus(status);
         return new ResponseEntity<>(serviceContracts, HttpStatus.OK);
     }
+
+    @GetMapping("user/serviceContract/hide")
+    public ResponseEntity<List<ServiceContractDTO>> findServiceContractsWithinDateRange(
+            @RequestParam Integer month,
+            @RequestParam Integer year
+    ) {
+        logger.info("Body- {}", month);
+        List<ServiceContractDTO> serviceContracts = serviceContractService.findServiceContractsWithinDateRange(month,year);
+        return ResponseEntity.ok(serviceContracts);
+    }
 }

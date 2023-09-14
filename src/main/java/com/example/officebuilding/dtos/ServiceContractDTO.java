@@ -9,6 +9,7 @@ public class ServiceContractDTO {
     private int id;
     private String scDateEnd;
     private String scDateBegin;
+    private double scPrice;
     private int scStatus;
     private Timestamp scTime;
 

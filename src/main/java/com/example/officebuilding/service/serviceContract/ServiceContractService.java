@@ -1,12 +1,15 @@
 package com.example.officebuilding.service.serviceContract;
 
+import com.example.officebuilding.dtos.RentalDTO;
 import com.example.officebuilding.dtos.ServiceContractDTO;
+import com.example.officebuilding.entities.RentalEntity;
 import com.example.officebuilding.entities.ServiceContractEntity;
 import com.example.officebuilding.repository.IServiceContractRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -58,5 +61,46 @@ public class ServiceContractService implements IServiceContractService {
         return serviceContractEntities.stream()
                 .map((serviceContractEntity -> modelMapper.map(serviceContractEntity, ServiceContractDTO.class)))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ServiceContractDTO> findServiceContractsWithinDateRange(Integer month, Integer year) {
+
+        List<ServiceContractEntity> serviceContractEntities = serviceContractRepository.findAll();
+
+        List<ServiceContractDTO> filteredRentals = new ArrayList<>();
+        for (ServiceContractEntity serviceContractEntity : serviceContractEntities){
+
+            Integer yearBegin = Integer.parseInt(serviceContractEntity.getScDateBegin().substring(0, 4));
+            Integer yearEnd = Integer.parseInt(serviceContractEntity.getScDateEnd().substring(0, 4));
+            Integer monthBegin = Integer.parseInt(serviceContractEntity.getScDateBegin().substring(5, 7));
+            Integer monthEnd = Integer.parseInt(serviceContractEntity.getScDateEnd().substring(5, 7));
+
+
+
+            if (year - yearBegin ==0 && year - yearEnd == 0){
+
+                if(month - monthBegin >=0 && monthEnd - month > 0){
+                    ServiceContractDTO serviceContractDTO = modelMapper.map(serviceContractEntity, ServiceContractDTO.class);
+                    filteredRentals.add(serviceContractDTO);
+                }
+            } else if (year - yearBegin == 0) {
+
+                if(month - monthBegin >=0){
+                    ServiceContractDTO serviceContractDTO = modelMapper.map(serviceContractEntity, ServiceContractDTO.class);
+                    filteredRentals.add(serviceContractDTO);
+                }
+            } else if (year - yearEnd ==0) {
+
+                if (monthEnd - month > 0){
+                    ServiceContractDTO serviceContractDTO = modelMapper.map(serviceContractEntity, ServiceContractDTO.class);
+                    filteredRentals.add(serviceContractDTO);
+                }
+            } else if(year - yearBegin >0 && yearEnd - year >0 ){
+                ServiceContractDTO serviceContractDTO = modelMapper.map(serviceContractEntity, ServiceContractDTO.class);
+                filteredRentals.add(serviceContractDTO);
+            }
+        }
+        return filteredRentals;
     }
 }

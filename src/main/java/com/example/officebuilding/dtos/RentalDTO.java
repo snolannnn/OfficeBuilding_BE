@@ -10,6 +10,7 @@ public class RentalDTO {
     private int id;
     private String reDateBegin;
     private String reDateEnd;
+    private double rePrice;
     private int reStatus;
     private Timestamp reTime;
 

@@ -25,6 +25,9 @@ public class CompanyEntity {
     @Column(nullable = false)
     private String cusTaxCode;
 
+    @Column(nullable = false)
+    private Integer cusStatus;
+
     private Timestamp cTime;
 
     @PrePersist

@@ -1,5 +1,6 @@
 package com.example.officebuilding.service.serviceContract;
 
+import com.example.officebuilding.dtos.RentalDTO;
 import com.example.officebuilding.dtos.ServiceContractDTO;
 import com.example.officebuilding.service.IGeneralService;
 
@@ -9,5 +10,5 @@ public interface IServiceContractService extends IGeneralService<ServiceContract
     ServiceContractDTO update(ServiceContractDTO serviceContractDTO);
 
     List<ServiceContractDTO> findAllByStatus(Integer scStatus);
-
+    List<ServiceContractDTO> findServiceContractsWithinDateRange(Integer month, Integer year);
 }

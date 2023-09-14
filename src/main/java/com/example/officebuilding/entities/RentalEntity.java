@@ -21,6 +21,9 @@ public class RentalEntity {
     private String reDateEnd;
 
     @Column(nullable = false)
+    private double rePrice;
+
+    @Column(nullable = false)
     private Integer reStatus;
 
     private Timestamp reTime;
