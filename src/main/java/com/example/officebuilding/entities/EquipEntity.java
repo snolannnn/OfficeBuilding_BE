@@ -32,4 +32,7 @@ public class EquipEntity {
     @JoinColumn(name = "floor_id", referencedColumnName= "id",nullable = true)
     private FloorEntity floor;
 
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    @JoinColumn(name = "room_id", referencedColumnName= "id",nullable = true)
+    private FloorEntity room;
 }

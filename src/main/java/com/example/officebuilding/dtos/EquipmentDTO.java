@@ -13,4 +13,5 @@ public class EquipmentDTO {
     private Timestamp eTime;
 
     private Integer floorId;
+    private Integer roomId;
 }
