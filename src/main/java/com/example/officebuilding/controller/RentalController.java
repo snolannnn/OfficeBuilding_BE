@@ -21,8 +21,14 @@ public class RentalController {
     private static final Logger logger = LoggerFactory.getLogger(RentalController.class);
     @PostMapping("/rental/create")
     public ResponseEntity<RentalDTO> createNewRental(@RequestBody RentalDTO rentalDTO){
-        logger.info("Body- {}", rentalDTO);
-        return new ResponseEntity<>(rentalService.createRentalWithRoomStatusChange(rentalDTO,1),HttpStatus.OK);
+        logger.info("Body- {} la id cua room", rentalDTO.getRoomId());
+        List<RentalDTO> rentals = rentalService.findAllByRoomId(rentalDTO.getRoomId());
+        logger.info("Body- {} length theo id", rentals.size());
+        if (rentals.size() > 0){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }else{
+            return new ResponseEntity<>(rentalService.createRentalWithRoomStatusChange(rentalDTO,1),HttpStatus.OK);
+        }
     }
 
     @GetMapping("/user/rental/getAll")

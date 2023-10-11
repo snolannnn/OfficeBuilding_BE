@@ -43,6 +43,7 @@ public class RentalService implements IRentalService {
         //Chuyển entity thành DTO rồi trả về cho controller:
         return rentalEntity.map(rentalEntity1 -> modelMapper.map(rentalEntity1, RentalDTO.class));
     }
+
     @Override
     public RentalDTO save(RentalDTO rentalDTO){
         RentalEntity rentalEntity = modelMapper.map(rentalDTO, RentalEntity.class);
@@ -89,6 +90,13 @@ public class RentalService implements IRentalService {
     @Override
     public List<RentalDTO> findAllByStatus(Integer reStatus) {
         List<RentalEntity> rentalEntities = rentalRepository.findByReStatus(reStatus);
+        return rentalEntities.stream()
+                .map(rentalEntity -> modelMapper.map(rentalEntity, RentalDTO.class))
+                .collect(Collectors.toList());
+    }
+    @Override
+    public List<RentalDTO> findAllByRoomId(Integer roomId) {
+        List<RentalEntity> rentalEntities = rentalRepository.findByRoomId(roomId);
         return rentalEntities.stream()
                 .map(rentalEntity -> modelMapper.map(rentalEntity, RentalDTO.class))
                 .collect(Collectors.toList());

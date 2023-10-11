@@ -38,6 +38,9 @@ public class ServiceContractEntity {
     @JoinColumn(name = "company_id")
     private CompanyEntity company;
 
+    @ManyToOne
+    @JoinColumn(name = "room_id")
+    private RoomEntity room;
 
     @ManyToOne
     @JoinColumn(name = "service_id")

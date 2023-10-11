@@ -12,6 +12,8 @@ public interface IRentalService extends IGeneralService<RentalDTO> {
 
     List<RentalDTO> findAllByStatus(Integer reStatus);
 
+    List<RentalDTO> findAllByRoomId(Integer roomId);
+
     List<RentalDTO> findRentalsWithinDateRange(Integer month,Integer year);
 
 }
