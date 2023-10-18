@@ -18,7 +18,7 @@ public class FloorController {
     @Autowired
     private IFloorService floorService;
     private static final Logger logger = LoggerFactory.getLogger(FloorController.class);
-    @PostMapping("/floor/create")
+    @PostMapping("/admin/floor/create")
     public ResponseEntity<FloorDTO> createNewFloor(@RequestBody FloorDTO floorDTO){
         logger.info("Body- {}", floorDTO);
         return new ResponseEntity<>(floorService.save(floorDTO),HttpStatus.OK);
@@ -37,7 +37,7 @@ public class FloorController {
         }).orElseGet(()->new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @PutMapping("/floor/update/{id}")
+    @PutMapping("/admin/floor/update/{id}")
     public ResponseEntity<FloorDTO> updateFloor(@PathVariable Integer id, @RequestBody FloorDTO floorDTO){
         logger.info("Body- {}", floorDTO);
 
@@ -49,7 +49,7 @@ public class FloorController {
         }).orElseGet(()->new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @DeleteMapping("/floor/delete/{id}")
+    @DeleteMapping("/admin/floor/delete/{id}")
     public ResponseEntity<FloorDTO> deleteFloor(@PathVariable Integer id){
         Optional<FloorDTO> floorDTOOptional = floorService.findById(id);
         return floorDTOOptional.map(floorDTO -> {

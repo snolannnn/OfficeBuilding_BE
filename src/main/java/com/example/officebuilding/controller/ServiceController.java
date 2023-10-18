@@ -19,7 +19,7 @@ public class ServiceController {
     @Autowired
     private IServiceService serviceService;
     private static final Logger logger = LoggerFactory.getLogger(ServiceController.class);
-    @PostMapping("/service/create")
+    @PostMapping("/admin/service/create")
     public ResponseEntity<ServiceDTO> createNewService(@RequestBody ServiceDTO serviceDTO){
         logger.info("Body- {}", serviceDTO);
         return new ResponseEntity<>(serviceService.save(serviceDTO),HttpStatus.OK);
@@ -38,7 +38,7 @@ public class ServiceController {
         }).orElseGet(()->new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @PutMapping("/service/update/{id}")
+    @PutMapping("/user/service/update/{id}")
     public ResponseEntity<ServiceDTO> updateService(@PathVariable Integer id, @RequestBody ServiceDTO serviceDTO){
         logger.info("Body- {}", serviceDTO);
 
@@ -50,7 +50,7 @@ public class ServiceController {
         }).orElseGet(()->new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @DeleteMapping("/service/delete/{id}")
+    @DeleteMapping("/admin/service/delete/{id}")
     public ResponseEntity<ServiceDTO> deleteService(@PathVariable Integer id){
         Optional<ServiceDTO> serviceDTOOptional = serviceService.findById(id);
         return serviceDTOOptional.map(serviceDTO -> {

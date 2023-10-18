@@ -19,7 +19,7 @@ public class RentalController {
     @Autowired
     private IRentalService rentalService;
     private static final Logger logger = LoggerFactory.getLogger(RentalController.class);
-    @PostMapping("/rental/create")
+    @PostMapping("/user/rental/create")
     public ResponseEntity<RentalDTO> createNewRental(@RequestBody RentalDTO rentalDTO){
         logger.info("Body- {} la id cua room", rentalDTO.getRoomId());
         List<RentalDTO> rentals = rentalService.findAllByRoomId(rentalDTO.getRoomId());
@@ -44,7 +44,7 @@ public class RentalController {
         }).orElseGet(()->new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @PutMapping("/rental/update/{id}")
+    @PutMapping("/user/rental/update/{id}")
     public ResponseEntity<RentalDTO> rentalFloor(@PathVariable Integer id, @RequestBody RentalDTO rentalDTO){
         logger.info("Body- {}", rentalDTO);
 
@@ -56,7 +56,7 @@ public class RentalController {
         }).orElseGet(()->new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @DeleteMapping("/rental/delete/{id}")
+    @DeleteMapping("/user/rental/delete/{id}")
     public ResponseEntity<RentalDTO> deleteRental(@PathVariable Integer id){
         Optional<RentalDTO> rentalDTOOptional = rentalService.findById(id);
         return rentalDTOOptional.map(rentalDTO -> {
@@ -65,7 +65,7 @@ public class RentalController {
         }).orElseGet(()->new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @PutMapping("/rental/cancel/{id}")
+    @PutMapping("/user/rental/cancel/{id}")
     public ResponseEntity<RentalDTO> cancelRental(@PathVariable Integer id,@RequestParam String dateEnd) {
         logger.info("Body- {}", id);
         rentalService.cancelRental(id,dateEnd);

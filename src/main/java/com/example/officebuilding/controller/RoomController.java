@@ -21,7 +21,7 @@ public class RoomController {
     @Autowired
     private IRoomService roomService;
     private static final Logger logger = LoggerFactory.getLogger(RoomController.class);
-    @PostMapping("/room/create")
+    @PostMapping("/admin/room/create")
     public ResponseEntity<RoomDTO> createNewRoom(@RequestBody RoomDTO roomDTO){
         logger.info("Body- {}", roomDTO);
         return new ResponseEntity<>(roomService.save(roomDTO),HttpStatus.OK);
@@ -40,7 +40,7 @@ public class RoomController {
         }).orElseGet(()->new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @PutMapping("/room/update/{id}")
+    @PutMapping("user/room/update/{id}")
     public ResponseEntity<RoomDTO> roomFloor(@PathVariable Integer id, @RequestBody RoomDTO roomDTO){
         logger.info("Body- {}", roomDTO);
 
@@ -52,7 +52,7 @@ public class RoomController {
         }).orElseGet(()->new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @DeleteMapping("/room/delete/{id}")
+    @DeleteMapping("/admin/room/delete/{id}")
     public ResponseEntity<RoomDTO> deleteRoom(@PathVariable Integer id){
         Optional<RoomDTO> roomDTOOptional = roomService.findById(id);
         return roomDTOOptional.map(roomDTO -> {

@@ -20,7 +20,7 @@ public class EquipmentController {
     @Autowired
     private IEquipmentService equipmentService;
     private static final Logger logger = LoggerFactory.getLogger(EquipmentController.class);
-    @PostMapping("/equipment/create")
+    @PostMapping("/admin/equipment/create")
     public ResponseEntity<EquipmentDTO> createNewEquipment(@RequestBody EquipmentDTO equipmentDTO){
         logger.info("Body- {}", equipmentDTO);
         return new ResponseEntity<>(equipmentService.save(equipmentDTO),HttpStatus.OK);
@@ -39,7 +39,7 @@ public class EquipmentController {
         }).orElseGet(()->new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @PutMapping("/equipment/update/{id}")
+    @PutMapping("/user/equipment/update/{id}")
     public ResponseEntity<EquipmentDTO> equipmentFloor(@PathVariable Integer id, @RequestBody EquipmentDTO equipmentDTO){
         logger.info("Body- {}", equipmentDTO);
 
@@ -51,7 +51,7 @@ public class EquipmentController {
         }).orElseGet(()->new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @DeleteMapping("/equipment/delete/{id}")
+    @DeleteMapping("/admin/equipment/delete/{id}")
     public ResponseEntity<EquipmentDTO> deleteEquipment(@PathVariable Integer id){
         Optional<EquipmentDTO> equipmentDTOOptional = equipmentService.findById(id);
         return equipmentDTOOptional.map(equipmentDTO -> {

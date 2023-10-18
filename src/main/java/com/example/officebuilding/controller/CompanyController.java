@@ -19,7 +19,7 @@ public class CompanyController {
     @Autowired
     private ICompanyService companyService;
     private static final Logger logger = LoggerFactory.getLogger(CompanyController.class);
-    @PostMapping("/company/create")
+    @PostMapping("/user/company/create")
     public ResponseEntity<CompanyDTO> createNewCompany(@RequestBody CompanyDTO companyDTO){
         logger.info("Body- {}", companyDTO);
         return new ResponseEntity<>(companyService.save(companyDTO),HttpStatus.OK);
@@ -38,7 +38,7 @@ public class CompanyController {
         }).orElseGet(()->new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @PutMapping("/company/update/{id}")
+    @PutMapping("/user/company/update/{id}")
     public ResponseEntity<CompanyDTO> updateCompany(@PathVariable Integer id, @RequestBody CompanyDTO companyDTO){
         logger.info("Body- {}", companyDTO);
 
@@ -50,7 +50,7 @@ public class CompanyController {
         }).orElseGet(()->new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @DeleteMapping("/company/delete/{id}")
+    @DeleteMapping("/user/company/delete/{id}")
     public ResponseEntity<CompanyDTO> deleteCompany(@PathVariable Integer id){
         Optional<CompanyDTO> companyDTOOptional = companyService.findById(id);
         return companyDTOOptional.map(companyDTO -> {

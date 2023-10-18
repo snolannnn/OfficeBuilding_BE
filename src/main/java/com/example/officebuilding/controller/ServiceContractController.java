@@ -20,7 +20,7 @@ public class ServiceContractController {
     @Autowired
     private IServiceContractService serviceContractService;
     private static final Logger logger = LoggerFactory.getLogger(ServiceContractController.class);
-    @PostMapping("/serviceContract/create")
+    @PostMapping("/user/serviceContract/create")
     public ResponseEntity<ServiceContractDTO> createNewServiceContract(@RequestBody ServiceContractDTO serviceContractDTO){
         logger.info("Body- {}", serviceContractDTO);
         return new ResponseEntity<>(serviceContractService.save(serviceContractDTO),HttpStatus.OK);
@@ -39,7 +39,7 @@ public class ServiceContractController {
         }).orElseGet(()->new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @PutMapping("/serviceContract/update/{id}")
+    @PutMapping("/user/serviceContract/update/{id}")
     public ResponseEntity<ServiceContractDTO> serviceContractFloor(@PathVariable Integer id, @RequestBody ServiceContractDTO serviceContractDTO){
         logger.info("Body- {}", serviceContractDTO);
 
@@ -51,7 +51,7 @@ public class ServiceContractController {
         }).orElseGet(()->new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @DeleteMapping("/serviceContract/delete/{id}")
+    @DeleteMapping("/user/serviceContract/delete/{id}")
     public ResponseEntity<ServiceContractDTO> deleteServiceContract(@PathVariable Integer id){
         Optional<ServiceContractDTO> serviceContractDTOOptional = serviceContractService.findById(id);
         return serviceContractDTOOptional.map(serviceContractDTO -> {
