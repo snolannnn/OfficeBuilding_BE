@@ -7,6 +7,8 @@ import com.example.officebuilding.security.jwt.JwtResponse;
 import com.example.officebuilding.security.jwt.JwtService;
 import com.example.officebuilding.security.service.IRoleService;
 import com.example.officebuilding.security.service.IUserService;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -45,20 +48,36 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody User user) {
         try {
+            try{
+                User currentUser1 = userService.findByUsername(user.getUsername()).get();
+            }catch (Exception e) {
+                logger.info("khong ton tai username. Message - {}");
+                Map<String, Object> response = new HashMap<>();
+                response.put("message", "Tài khoản không tồn tại");
+                return ResponseEntity.status(HttpStatus.OK).body(response);
+            }
+
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
             String jwt = jwtService.generateTokenLogin(authentication);
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-            User currentUser = userService.findByUsername(user.getUsername()).get();
+            User currentUser = userService.findByUsername(user.getUsername()).orElse(null);
+
             logger.info("User Sign In. Message - {}", currentUser);
-            return ResponseEntity.ok(new JwtResponse(jwt, currentUser.getId(), userDetails.getUsername(),currentUser.getEmail(), userDetails.getAuthorities()));
+            return ResponseEntity.ok(new JwtResponse(jwt, currentUser.getId(), userDetails.getUsername(), currentUser.getEmail(), userDetails.getAuthorities()));
+        } catch (BadCredentialsException e) {
+            // Xử lý khi mật khẩu không đúng
+            Map<String, Object> response = new HashMap<>();
+            response.put("message", "Mật khẩu không đúng");
+            return ResponseEntity.status(HttpStatus.OK).body(response);
+        } catch (Exception e) {
+            // Xử lý các lỗi khác
+            Map<String, Object> response = new HashMap<>();
+            response.put("message", "Lỗi đăng nhập");
+            return ResponseEntity.status(HttpStatus.OK).body(response);
         }
-        catch (Exception e){
-            System.out.println(e);
-        }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Lỗi đăng nhập");
     }
 
     @PostMapping("/register")
