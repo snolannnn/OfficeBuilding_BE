@@ -1,6 +1,7 @@
 package com.example.officebuilding.service.company;
 
 import com.example.officebuilding.dtos.CompanyDTO;
+import com.example.officebuilding.dtos.RentalDTO;
 import com.example.officebuilding.entities.CompanyEntity;
 import com.example.officebuilding.repository.ICompanyRepository;
 import org.modelmapper.ModelMapper;
@@ -24,6 +25,13 @@ public class CompanyService implements ICompanyService {
         List<CompanyEntity> companyEntities = companyRepository.findAll();
         List<CompanyDTO> companyDTOS = companyEntities.stream().map(companyEntity -> modelMapper.map(companyEntity, CompanyDTO.class)).collect(Collectors.toList());
         return companyDTOS;
+    }
+    @Override
+    public List<CompanyDTO> findAllByCStatus(Integer cusStatus){
+        List<CompanyEntity> companyEntities = companyRepository.findAllByCusStatus(cusStatus);
+        return companyEntities.stream()
+                .map(rentalEntity -> modelMapper.map(companyEntities, CompanyDTO.class))
+                .collect(Collectors.toList());
     }
 
     @Override

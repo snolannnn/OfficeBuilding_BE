@@ -22,8 +22,8 @@ public class RentalController {
     @PostMapping("/user/rental/create")
     public ResponseEntity<RentalDTO> createNewRental(@RequestBody RentalDTO rentalDTO){
         logger.info("Body- {} la id cua room", rentalDTO.getRoomId());
-        List<RentalDTO> rentals = rentalService.findAllByRoomId(rentalDTO.getRoomId());
-        logger.info("Body- {} length theo id", rentals.size());
+        List<RentalDTO> rentals = rentalService.findAllByRoomIdAndStatus(rentalDTO.getRoomId(),1);
+        logger.info("length theo id Body- {} ", rentals.size());
         if (rentals.size() > 0){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }else{

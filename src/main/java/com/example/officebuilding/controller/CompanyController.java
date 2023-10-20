@@ -29,6 +29,10 @@ public class CompanyController {
     public ResponseEntity<List<CompanyDTO>> getAllCompany(){
         return new ResponseEntity<>(companyService.findAll(),HttpStatus.OK);
     }
+    @GetMapping("/user/company/getAllByCusStatus/{status}")
+    public ResponseEntity<List<CompanyDTO>> getAllCompanyByCusStatus(@PathVariable Integer status){
+        return new ResponseEntity<>(companyService.findAllByCStatus(status),HttpStatus.OK);
+    }
 
     @GetMapping("/user/company/{id}")
     public ResponseEntity<CompanyDTO> getCompanyById(@PathVariable Integer id){
@@ -58,4 +62,6 @@ public class CompanyController {
             return new ResponseEntity<>(companyDTO,HttpStatus.OK);
         }).orElseGet(()->new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
+
+
 }

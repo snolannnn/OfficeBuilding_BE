@@ -102,6 +102,13 @@ public class RentalService implements IRentalService {
                 .collect(Collectors.toList());
     }
     @Override
+    public List<RentalDTO> findAllByRoomIdAndStatus(Integer roomId, Integer reStatus) {
+        List<RentalEntity> rentalEntities = rentalRepository.findAllByRoomIdAndReStatus(roomId,reStatus);
+        return rentalEntities.stream()
+                .map(rentalEntity -> modelMapper.map(rentalEntity, RentalDTO.class))
+                .collect(Collectors.toList());
+    }
+    @Override
     public List<RentalDTO> findRentalsWithinDateRange(Integer month,Integer year) {
 
         List<RentalEntity> rentalEntities = rentalRepository.findAll();

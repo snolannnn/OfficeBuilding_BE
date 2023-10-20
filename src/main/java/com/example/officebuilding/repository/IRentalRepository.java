@@ -9,4 +9,6 @@ import java.util.List;
 public interface IRentalRepository extends JpaRepository<RentalEntity,Integer> {
     List<RentalEntity> findByReStatus(Integer reStatus);
     List<RentalEntity> findByRoomId(Integer roomId);
+
+    List<RentalEntity> findAllByRoomIdAndReStatus(Integer roomId, Integer reStatus);
 }
